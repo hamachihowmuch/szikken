@@ -1,0 +1,63 @@
+switch(cursorState)
+{
+	case 0x0080:			// 上キー
+		print("Up\n");
+		leftFB = FORWARD;	// 左右正転
+		rightFB = FORWARD;			
+		leftAim = recv_cnt*2.0;		// ここを変更：左モータ回転速度[%] = 受信回数*2
+		rightAim = recv_cnt*2.0;	// ここを変更：右モータ回転速度[%] = 受信回数*2
+		break;
+	case 0x0040:			// 上、右キー
+		print("Up Right\n");		
+		leftFB = FORWARD;	// 左右正転
+		rightFB = FORWARD;
+		leftAim = recv_cnt;		// 左モータ回転速度[%] = 受信回数
+		rightAim = recv_cnt >> 1;	// 右モータ回転速度[%] = 受信回数/ 2
+		break;
+	case 0x0020:			// 右キー
+		print("Right\n");
+		leftFB = FORWARD;	// 左正転、右逆転
+		rightFB = BACKWARD;
+		leftAim = recv_cnt*0.1;	// ここを変更：左モータ回転速度[%] = 受信回数*0.1
+		rightAim = recv_cnt*0.1;// ここを変更：右モータ回転速度[%] = 受信回数*0.1
+		break;
+	case 0x0010:			// 下、右キー
+		print("Down Right\n");
+		leftFB = BACKWARD;	// 左右逆転
+		rightFB = BACKWARD;
+		leftAim = recv_cnt;		// 左モータ回転速度[%] = 受信回数
+		rightAim = recv_cnt >>1;	// 右モータ回転速度[%] = 受信回数 / 2
+		break;
+	case 0x0008:			// 下キー
+		print("Down\n");
+		leftFB = BACKWARD;	// 左右逆転
+		rightFB = BACKWARD;
+		leftAim = recv_cnt*2.0;	// ここを変更：左モータ回転速度[%] = 受信回数*2
+		rightAim = recv_cnt*2.0;// ここを変更：右モータ回転速度[%] = 受信回数*2
+		break;
+	case 0x0004:			// 下、左キー
+		print("Down Left\n");
+		leftFB = BACKWARD;	// 左右逆転
+		rightFB = BACKWARD;
+		leftAim = recv_cnt >> 1;	// 左モータ回転速度[%] = 受信回数 / 2
+		rightAim = recv_cnt;		// 右モータ回転速度[%] = 受信回数
+		break;
+	case 0x0002:			// 左キー
+		print("Left\n");
+		leftFB = BACKWARD;	// 左逆転、右正転
+		rightFB = FORWARD;
+		leftAim = recv_cnt*0.1;		// ここを変更：左モータ回転速度[%] = 受信回数*0.1
+		rightAim = recv_cnt*0.1;	// ここを変更：右モータ回転速度[%] = 受信回数*0.1
+		break;
+	case 0x0001:			// 上、左キー
+		print("Up Left\n");
+		leftFB = FORWARD;	// 左右正転
+		rightFB = FORWARD;
+		leftAim = recv_cnt >> 1;	// 左モータ回転速度[%] = 受信回数 / 2
+		rightAim = recv_cnt;	// 右モータ回転速度[%] = 受信回数
+		break;
+	default:
+		print("Cursor data Error\n");
+		break;
+	}
+}

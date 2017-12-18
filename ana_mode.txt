@@ -1,0 +1,15 @@
+//前進動作
+if(rightSpeed > 0 && leftSpeed > 0 && rightSpeed == leftSpeed)	//左スティックの状態で分岐
+{
+	// 右モータの回転方向を設定 FORWARD→正転 BACKWARD→後転
+	rightFB = FORWARD;
+	// 左モータの回転方向を設定 FORWARD→正転 BACKWARD→後転
+	leftFB = FORWARD;
+
+	// モータの目標値を設定（※必ず正の値を入れること）
+	rightAim = rightSpeed*4.0;   //ここを変更：受信した速度指令値を4倍してから目標速度として格納
+	leftAim = leftSpeed*4.0;   //ここを変更：受信した速度指令値を4倍してから目標速度として格納
+
+	//各値を表示
+	print("motor_speed:%d  left:%d  right:%d\n",motor_speed,leftAim,rightAim);
+}
